@@ -1,39 +1,7 @@
 # 短Url生成器
 
 #### 项目介绍
-{**以下是码云平台说明，您可以替换为您的项目简介**
-码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
-
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
-
-
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+    通过“时间戳”与“自定义权值”为种子制作62位发号器。
+    以-----（时间戳）*（自定义参数）+（权值）mod（自定义参数）-----的形式创建种子，其中自定义参数为单位时间内允许的最大短Url创建量，权值与最后一次创建的短Url的ID（或者说是已经创建的短Url数）有关。
+    创建Cache表缓存最近创建数据
+    SQL数据库内创建两张表（Cache表 和 KeyValue表），其中Cache表最多会存储10条数据，为最新创建的短Url，其余的会自动删除。KeyValue表存储了所有的（longUrl，shortUrl）对。当要创建短Url时，在搜索Cache表没有数据时才会再搜索KeyValue表，如果都没有，才会进行创建，否则则返回相应的Url。
